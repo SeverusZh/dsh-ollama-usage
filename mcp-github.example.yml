@@ -1,0 +1,25 @@
+# GitHub MCP 接线样例
+#
+# 把下面这段追加到 profile 的 patch 层(如 ~/.dsh/profiles/web/cordis.patch.yml)
+# 或任意 --patch overlay,即可在本机 DSH 中启用 GitHub MCP 服务器:
+#
+#   dsh --profile web --patch ./mcp-github.example.yml
+#
+# 之后模型会话会获得 mcp__github__* 工具(create_repository / git 相关 / issues…),
+# 可用它完成建仓与推送。注意:GitHub MCP 只覆盖 GitHub 侧;
+# npm 发布仍需 npm 账号(npm login / NPM_TOKEN)。
+#
+# 前置:
+#   1. 在 https://github.com/settings/tokens 创建 Personal Access Token
+#      (fine-grained, 授予新建仓库所在组织的 "Contents: read/write"; 或 classic,
+#      scope 选 repo), 例如 GITHUB_TOKEN=github_pat_xxx
+#   2. 确保本机有 node >= 18(server 经 npx 拉取)
+- id: mcp-github
+  name: '@deepseek-ai/dsh-mcp-client'
+  config:
+    serverName: github
+    transport: stdio
+    command: npx
+    args: ['-y', '@modelcontextprotocol/server-github']
+    env:
+      GITHUB_TOKEN: !!js process.env.GITHUB_TOKEN
