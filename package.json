@@ -48,6 +48,11 @@
   "dependencies": {
     "@deepseek-ai/dsh-home-paths": "^0.1.0-rc.6"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SeverusZh/dsh-ollama-usage.git"
+  },
+  "homepage": "https://github.com/SeverusZh/dsh-ollama-usage#readme",
   "keywords": [
     "deepseek",
     "deepseek-harness",
