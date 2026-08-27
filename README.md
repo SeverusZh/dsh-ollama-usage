@@ -49,7 +49,7 @@ dsh --profile web
 
 1. 打开 **设置 → Ollama 用量**；
 2. 未登录时按面板指引：登录 [ollama.com](https://ollama.com/settings) →
-   [settings/keys](https://ollama.com/settings/keys) 创建 API Key（`ollama-` 开头）→
+   [settings/keys](https://ollama.com/settings/keys) 创建 API Key →
    粘贴并点 **检测**（或终端 `ollama signin` 后点 **重新检测本地凭证**）；
 3. 检测成功后即持久化，展开侧边栏即可看到底部双横条，面板可随时查看详情与历史；
 4. 不再需要时点 **清除已存 Key** 移除本地凭证（历史保留）。
