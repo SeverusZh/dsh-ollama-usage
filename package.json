@@ -68,5 +68,8 @@
     "zh",
     "en"
   ],
-  "license": "MIT"
+  "license": "MIT",
+  "scripts": {
+    "test": "DSH_HOME=.tmp-dsh-home HOME=.tmp-home node test/bridge-smoke.mjs"
+  }
 }
