@@ -1,6 +1,6 @@
 {
   "name": "dsh-ollama-usage",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "DeepSeek Harness 插件:可视化 Ollama Cloud 账号用量余量(每 5 小时会话用量 + 周用量),支持侧边栏双横条、设置页面板、API Key 与用量快照持久化、自动刷新与登录引导。Ollama Pro usage & remaining-quota visualization for DeepSeek Harness: 5-hour session + weekly quota bars in the sidebar footer, a full settings panel, persisted API key and usage snapshots, auto-refresh and login guidance.",
   "type": "module",
   "main": "lib/index.js",
@@ -19,15 +19,26 @@
     },
     "client": {
       "platform": "web",
-      "inject": ["slots", "connection", "timer"]
+      "inject": [
+        "slots",
+        "connection",
+        "timer"
+      ]
     }
   },
   "dshhub": {
     "schemaVersion": 1,
     "displayName": "dsh-ollama-usage",
     "summary": "Ollama Cloud 用量余量可视化:会话(5h)/周用量双横条 + 设置页完整面板,Key 与快照持久化,自动刷新,登录引导。",
-    "categories": ["用量", "Web UI", "观测"],
-    "surfaces": ["host", "web"],
+    "categories": [
+      "用量",
+      "Web UI",
+      "观测"
+    ],
+    "surfaces": [
+      "host",
+      "web"
+    ],
     "capabilities": {
       "provides": []
     },
@@ -36,7 +47,9 @@
       "node": ">=20"
     },
     "permissions": {
-      "network": ["https://ollama.com"]
+      "network": [
+        "https://ollama.com"
+      ]
     }
   },
   "files": [
