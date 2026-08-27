@@ -3,7 +3,7 @@
 DeepSeek Harness 插件：可视化 **Ollama Cloud** 账号的用量余量（每 5 小时会话用量 + 周用量），
 支持侧边栏双横条、设置页完整面板、API Key 与用量快照持久化、自动刷新与登录引导。
 
-A DeepSeek Harness plugin that visualizes your **Ollama Pro** usage / remaining quota
+A DeepSeek Harness plugin that visualizes your **Ollama Cloud** usage / remaining quota
 (5-hour session bucket + weekly bucket), with a minimalist sidebar double-bar,
 a full settings panel, persisted API key and usage snapshots, auto-refresh,
 and login guidance.
