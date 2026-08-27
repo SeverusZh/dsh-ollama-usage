@@ -1,0 +1,11 @@
+# dsh-ollama-usage bundle patch.
+#
+# Adds the plugin's single Loader row. The row name resolves from the
+# profile's own node_modules, where `dsh plugin --profile <name> add`
+# installed this package.
+#
+# 安装: dsh plugin --profile web add dsh-ollama-usage
+# 重启: dsh --profile web
+- insert:
+    - id: ollama-usage
+      name: dsh-ollama-usage
