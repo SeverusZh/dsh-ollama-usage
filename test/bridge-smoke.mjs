@@ -19,16 +19,16 @@ const assert = (cond, msg) => {
 let capturedHandler = null
 let intervalStarted = false
 const fakeCtx = {
+  // 插件经 inject 声明 webServer 后,apply 里直接读 ctx.webServer(属性访问)
+  webServer: {
+    register(route) {
+      assert(route.kind === 'prefix' && route.path === '/ollama-usage', '路由注册为 /ollama-usage prefix')
+      capturedHandler = route.handler
+      return () => {}
+    },
+  },
   get(name) {
-    if (name === 'webServer') {
-      return {
-        register(route) {
-          assert(route.kind === 'prefix' && route.path === '/ollama-usage', '路由注册为 /ollama-usage prefix')
-          capturedHandler = route.handler
-          return () => {}
-        },
-      }
-    }
+    if (name === 'webServer') return this.webServer
     return undefined
   },
   effect(fn, label) {
