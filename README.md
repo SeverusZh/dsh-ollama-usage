@@ -27,7 +27,7 @@ panel, persisted credentials & snapshots, auto-refresh.*
 | 🎯 **会话用量（每 5 小时）** | Ollama Cloud 的 5 小时会话配额，置顶展示「已用 X% · 剩余 Y%」 |
 | 📅 **周用量（Weekly）** | 本周配额进度，与会话用量并排展示 |
 | 🎨 **侧边栏双横条** | 极简透明风格：会话 5h **淡紫** + 周用量**深紫**，各带百分比数字，悬停显示详情，每 60 秒自动更新（窄栏自动隐藏） |
-| 🖥️ **设置页完整面板** | 周期起止时间、近 4 周费用、模型请求数排行、最近 5 条会话用量历史 |
+| 🖥️ **设置页完整面板** | 会话/周用量进度条、周用量重置倒计时、模型请求数排行、最近 5 条会话用量历史 |
 | 💾 **持久化** | API Key 与用量快照写入 `$DSH_HOME/storages/ollama-usage/usage.json`（权限 600，保留 24 条历史），跨对话 / 重启自动恢复 |
 | 🔄 **自动刷新** | Host 每 10 分钟自动查询（页面关闭也持续）；Key 失效（401）自动清除并提示 |
 | 🔑 **登录引导** | 未登录时一键打开 [ollama.com/settings](https://ollama.com/settings) 登录、到 [settings/keys](https://ollama.com/settings/keys) 创建 API Key；兼容旧版 CLI 的 `~/.ollama/auth.json` |

@@ -6,7 +6,7 @@
  * 运行: DSH_HOME=./.tmp-dsh-home node test/bridge-smoke.mjs
  */
 import { Readable } from 'node:stream'
-import { mkdirSync, writeFileSync, existsSync, readFileSync } from 'node:fs'
+import { mkdirSync, writeFileSync, existsSync, readFileSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import plugin from '../lib/index.js'
 
@@ -75,6 +75,10 @@ async function call(endpoint, payload) {
 // ── 临时环境 ───────────────────────────────────────────────────────────
 const tmp = process.env.DSH_HOME
 assert(typeof tmp === 'string' && tmp.length > 0, 'DSH_HOME 已指向临时目录: ' + tmp)
+const tmpHome = process.env.HOME
+// 清理上次运行残留,保证可重复执行(仅限 .tmp 前缀的临时目录)
+if (tmp.includes('.tmp')) rmSync(tmp, { recursive: true, force: true })
+if (typeof tmpHome === 'string' && tmpHome.includes('.tmp')) rmSync(tmpHome, { recursive: true, force: true })
 const usageDir = join(tmp, 'storages', 'ollama-usage')
 mkdirSync(usageDir, { recursive: true })
 const usageFile = join(usageDir, 'usage.json')
@@ -84,7 +88,6 @@ let r = await call('check', {})
 assert(r.type === 'server-response' && r.result.ok === false && r.result.error.code === 'no-token', 'check 无凭证 → no-token')
 
 // 2) 伪造 ~/.ollama/auth.json(用临时 HOME)→ 走 401 分支并清除持久化 token
-const tmpHome = process.env.HOME
 const ollamaDir = join(tmpHome, '.ollama')
 mkdirSync(ollamaDir, { recursive: true })
 writeFileSync(join(ollamaDir, 'auth.json'), JSON.stringify({ token: 'ollama-dummy-invalid' }))
@@ -104,6 +107,10 @@ writeFileSync(usageFile, JSON.stringify({
 r = await call('snapshot', {})
 assert(r.result.ok === true && r.result.value.usage.weeklyPercent === 21.3, 'snapshot 返回持久化用量')
 assert(r.result.value.tokenPersisted === true && r.result.value.history.length === 1, 'snapshot 带 tokenPersisted 与历史')
+const now = new Date()
+const daysUntilMonday = ((7 - now.getUTCDay()) % 7) + 1
+const expectedWeeklyReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilMonday)).toISOString()
+assert(r.result.value.usage.weeklyResetAt === expectedWeeklyReset, '周重置 = 下周一 00:00 UTC(当前为 ' + now.toISOString() + ')')
 
 // 4) forget
 r = await call('forget', {})
