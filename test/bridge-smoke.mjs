@@ -107,6 +107,7 @@ writeFileSync(usageFile, JSON.stringify({
 r = await call('snapshot', {})
 assert(r.result.ok === true && r.result.value.usage.weeklyPercent === 21.3, 'snapshot 返回持久化用量')
 assert(r.result.value.tokenPersisted === true && r.result.value.history.length === 1, 'snapshot 带 tokenPersisted 与历史')
+assert(r.result.value.persisted === true, 'snapshot 报告 persisted: true(数据读自磁盘)')
 const now = new Date()
 const daysUntilMonday = ((7 - now.getUTCDay()) % 7) + 1
 const expectedWeeklyReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilMonday)).toISOString()
