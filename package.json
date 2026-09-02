@@ -46,7 +46,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@deepseek-ai/dsh-home-paths": "^0.1.0-rc.6"
+    "@deepseek-ai/dsh-home-paths": "^0.1.2-alpha.4"
   },
   "repository": {
     "type": "git",
@@ -70,6 +70,6 @@
   ],
   "license": "MIT",
   "scripts": {
-    "test": "DSH_HOME=.tmp-dsh-home HOME=.tmp-home node test/bridge-smoke.mjs"
+    "test": "DSH_HOME=.tmp-dsh-home HOME=.tmp-home node test/bridge-smoke.mjs && DSH_HOME=.tmp-env-dsh-home HOME=.tmp-env-home node test/rpc-envelope-alpha4.mjs"
   }
 }
