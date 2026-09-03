@@ -1,0 +1,94 @@
+[
+  {
+    "variant": "M1",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "check-no-local-fallback": "ok",
+      "check-persisted-token": "ok"
+    },
+    "pass": true,
+    "note": "移除 readLocalToken 回退:仅 ~/.ollama/auth.json 有 token 时 check 返回 no-token;持久化 token 读取保留"
+  },
+  {
+    "variant": "M2",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "check-no-data": "ok",
+      "fetch-not-called": "ok",
+      "snapshot-ok": "ok",
+      "auth-state-ok": "ok"
+    },
+    "pass": true,
+    "note": "移除 fetchUsage/parseUsage:check 端点恒返回 no-data 且不发起网络请求;snapshot/auth-state 保留"
+  },
+  {
+    "variant": "M3",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "check-ok": "ok",
+      "no-file-written": "ok",
+      "snapshot-reads-file": "ok"
+    },
+    "pass": true,
+    "note": "移除 writeFile(持久化写入):check 成功但 usage.json 不落盘;snapshot 磁盘读取保留"
+  },
+  {
+    "variant": "M4",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "no-interval": "ok",
+      "route-registered": "ok",
+      "check-route-works": "ok"
+    },
+    "pass": true,
+    "note": "移除 ctx.interval 注册:自动刷新定时器不再注册;RPC 路由与端点保留"
+  },
+  {
+    "variant": "M5",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "no-route": "ok",
+      "interval-registered": "ok"
+    },
+    "pass": true,
+    "note": "移除 ctx.webServer.register:无 RPC 路由(客户端无法连接);自动刷新定时器保留"
+  },
+  {
+    "variant": "M6",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "no-weekly-reset": "ok",
+      "snapshot-data-intact": "ok"
+    },
+    "pass": true,
+    "note": "移除 computeResetTimes/withResetTimes:snapshot 不再带 weeklyResetAt;用量数据保留"
+  },
+  {
+    "variant": "M7",
+    "loadOk": true,
+    "checks": {
+      "patch-applied": "ok",
+      "check-usage-ok": "ok",
+      "history-not-maintained": "ok"
+    },
+    "pass": true,
+    "note": "移除 history 维护:check 后历史恒为空;用量数据保留"
+  },
+  {
+    "variant": "M8",
+    "loadOk": true,
+    "checks": {
+      "index-no-client-import": "ok",
+      "client-self-contained": "ok",
+      "exports-decoupled": "ok"
+    },
+    "pass": true,
+    "note": "静态验证:client.js 独立于 index.js(模块解耦),index.js 不 import client.js"
+  }
+]

@@ -1,0 +1,23 @@
+diff --git a/lib/index.js b/lib/index.js
+index 40f1dfa..8214239 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -178,15 +178,12 @@ async function checkWithToken(token) {
+   }
+   // 持久化:token + 快照 + 历史(保留最近 24 条)
+   const now = new Date().toISOString()
+-  const prev = readFile()
+-  const history = Array.isArray(prev && prev.history) ? prev.history.slice() : []
+-  history.push({ at: now, sessionPercent: parsed.usage.sessionPercent, weeklyPercent: parsed.usage.weeklyPercent })
+-  const trimmed = history.length > HISTORY_CAP ? history.slice(history.length - HISTORY_CAP) : history
++  // 消融:历史记录维护被移除,history 恒为空
+   const usage = withResetTimes(parsed.usage, now)
+-  const persisted = writeFile({ token, updatedAt: now, usage, history: trimmed })
++  const persisted = writeFile({ token, updatedAt: now, usage, history: [] })
+   return {
+     ok: true,
+-    value: { usage, updatedAt: now, persisted, history: trimmed.slice(-5) },
++    value: { usage, updatedAt: now, persisted, history: [] },
+   }
+ }
+ 

@@ -1,0 +1,22 @@
+diff --git a/lib/index.js b/lib/index.js
+index 40f1dfa..a5b622c 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -144,15 +144,9 @@ function parseUsage(body, status) {
+  *  - weekly:下周一 00:00 UTC(last_4_weeks 周期锚点为周一)
+  * ------------------------------------------------------------------ */
+ 
+-function computeResetTimes(nowIso) {
+-  const now = new Date(nowIso)
+-  const daysUntilMonday = ((7 - now.getUTCDay()) % 7) + 1
+-  const weeklyResetAt = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilMonday)).toISOString()
+-  return { weeklyResetAt }
+-}
+-
+ function withResetTimes(usage, nowIso) {
+-  return Object.assign({}, usage, computeResetTimes(nowIso))
++  // 消融:周重置时间推算被移除,usage 原样返回(无 weeklyResetAt 字段)
++  return usage
+ }
+ 
+ /** 用 token 查询并把结果写入持久化文件;返回 RpcResult({ ok, value|error })。 */

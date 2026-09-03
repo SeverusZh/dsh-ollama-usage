@@ -1,0 +1,17 @@
+diff --git a/lib/index.js b/lib/index.js
+index 40f1dfa..6f7a16e 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -418,11 +418,7 @@ export default {
+       console.error('[ollama-usage] 路由注册失败: ' + String((e && e.message) || e))
+     }
+     // 2) 自动刷新:失败不影响插件启动
+-    try {
+-      ctx.effect(() => ctx.interval(autoRefresh, AUTO_REFRESH_MS), 'ollama-usage: auto refresh')
+-    } catch (e) {
+-      console.error('[ollama-usage] 自动刷新定时器不可用: ' + String((e && e.message) || e))
+-    }
++    // 消融:10 分钟自动刷新定时器注册被移除(仅保留启动时的一次性刷新)
+     autoRefresh().catch((e) => {
+       console.error('[ollama-usage] 首次自动刷新失败: ' + String((e && e.message) || e))
+     })

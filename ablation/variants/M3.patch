@@ -1,0 +1,21 @@
+diff --git a/lib/index.js b/lib/index.js
+index 40f1dfa..15e3382 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -49,14 +49,8 @@ function readFile() {
+ }
+ 
+ function writeFile(obj) {
+-  try {
+-    const dir = join(resolveDshHome(), 'storages', 'ollama-usage')
+-    mkdirSync(dir, { recursive: true })
+-    writeFileSync(filePath(), JSON.stringify(obj), { mode: 0o600 })
+-    return true
+-  } catch {
+-    return false
+-  }
++  // 消融:持久化写入被移除(内存态),readFile 保留以维持 snapshot 读取
++  return true
+ }
+ 
+ /* ------------------------------------------------------------------ *

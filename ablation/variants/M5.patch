@@ -1,0 +1,21 @@
+diff --git a/lib/index.js b/lib/index.js
+index 40f1dfa..18f2b12 100644
+--- a/lib/index.js
++++ b/lib/index.js
+@@ -408,15 +408,7 @@ export default {
+   inject: ['timer', 'webServer'],
+   apply(ctx) {
+     // 1) RPC 路由注册:webServer 已由 inject 保证可用
+-    try {
+-      ctx.effect(
+-        () => ctx.webServer.register({ kind: 'prefix', path: RPC_CHANNEL, handler: handleBridgeRequest }),
+-        'ollama-usage: rpc bridge',
+-      )
+-      console.log('[ollama-usage] RPC 路由已注册: ' + RPC_CHANNEL)
+-    } catch (e) {
+-      console.error('[ollama-usage] 路由注册失败: ' + String((e && e.message) || e))
+-    }
++    // 消融:/ollama-usage 前缀路由注册被移除(客户端将无法连接)
+     // 2) 自动刷新:失败不影响插件启动
+     try {
+       ctx.effect(() => ctx.interval(autoRefresh, AUTO_REFRESH_MS), 'ollama-usage: auto refresh')
