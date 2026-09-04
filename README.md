@@ -7,7 +7,7 @@
 [![npm version](https://img.shields.io/npm/v/dsh-ollama-usage?color=7c66e8&label=npm)](https://www.npmjs.com/package/dsh-ollama-usage)
 [![GitHub release](https://img.shields.io/github/v/release/SeverusZh/dsh-ollama-usage?color=b39df7&label=release)](https://github.com/SeverusZh/dsh-ollama-usage/releases)
 [![License](https://img.shields.io/badge/license-MIT-9ece6a)](LICENSE)
-[![dsh](https://img.shields.io/badge/dsh-%E2%89%A50.1.0--rc.5-7aa2f7)](https://github.com/deepseek-ai/dsh)
+[![dsh](https://img.shields.io/badge/dsh-%E2%89%A50.1.2--alpha.4-7aa2f7)](https://github.com/deepseek-ai/dsh)
 
 可视化你的 **Ollama Cloud** 用量余量 —— 每 5 小时会话用量 + 周用量，
 侧边栏极简双横条常驻显示，设置页完整面板，Key 与快照持久化，自动刷新。
@@ -19,6 +19,9 @@ panel, persisted credentials & snapshots, auto-refresh.*
 </div>
 
 ---
+
+> **兼容性 / Compatibility**：v0.1.6 支持 DSH **≥0.1.2-alpha.4**（真实 alpha.4 RPC envelope 探针全过）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
+> v0.1.6 targets DSH **≥0.1.2-alpha.4**; for older DSH releases use the last compatible npm version **0.1.5**.
 
 ## ✨ 功能特性 Features
 
