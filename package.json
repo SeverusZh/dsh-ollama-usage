@@ -59,7 +59,7 @@
     "LICENSE"
   ],
   "dependencies": {
-    "@deepseek-ai/dsh-home-paths": "^0.1.2-alpha.4"
+    "@deepseek-ai/dsh-home-paths": "^0.1.5-rc.1"
   },
   "repository": {
     "type": "git",
