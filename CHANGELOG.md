@@ -5,6 +5,25 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.8] - 2026-09-24
+
+### Changed
+
+- **DSH 0.1.7-rc.1 compatibility.** The `@deepseek-ai/dsh-home-paths`
+  peer range moves from `^0.1.5-rc.1` to `^0.1.7-rc.1`;
+  `dsh.compatibility.dshReleases` gains `"0.1.7-rc.1": "compatible"`; README
+  badges and the compatibility note are updated. Verified by a real load on
+  0.1.7-rc.1 (host entry active, zero errors) plus the RPC envelope probes.
+
+### Verified (no source change required)
+
+- `@deepseek-ai/dsh-home-paths@0.1.7-rc.1` still exports `resolveDshHome`
+  with the same signature, so the harness-home resolution and the state file
+  path layout are unchanged.
+- The host contracts it consumes — the `webServer` prefix route
+  (`/ollama-usage`) with `inject: ['timer', 'webServer']`, and the Connection
+  RPC result envelope — are unchanged in 0.1.7-rc.1.
+
 ## [0.1.7] - 2026-09-22
 
 ### Fixed
