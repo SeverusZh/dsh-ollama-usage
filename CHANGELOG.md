@@ -5,6 +5,27 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.9] - 2026-09-27
+
+### Changed
+
+- **The configuration panel moved to the plugin's own detail page** (插件列表 →
+  `dsh-ollama-usage`), rendered between the package description and the component
+  rows — the DSH settings page is no longer used for configuration.
+  - Removed the `settings.section` registration.
+  - Added a `plugins.bundle.config` registration keyed by the npm package name
+    (`dsh-ollama-usage`). That keyed slot is rendered by the plugin manager only
+    while a registration with exactly the package name exists
+    (`configured = ledger.bundles.has(pkg.name)` in `dsh-client-ui-plugin-manager`);
+    it has no native schema fallback form. A bundle page may hold several entries,
+    so the page passes no host `form` — the panel keeps owning its `/ollama-usage`
+    data channel. `view === 'summary'` renders nothing.
+  - The sidebar bars (`sidebar.footer.action`) and the `tool.view.cordis` panel are
+    unchanged.
+  - The signed-out tooltip now points at 插件列表 → dsh-ollama-usage instead of
+    设置 → Ollama 用量.
+- No inject change: this plugin does not read any `ctx.remote.*` namespace.
+
 ## [0.1.8] - 2026-09-25
 
 ### Changed

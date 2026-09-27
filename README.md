@@ -10,11 +10,11 @@
 [![dsh](https://img.shields.io/badge/DSH%200.1.5--rc.1%20%2F%20rc.2%20%2F%200.1.6--alpha.2%20%2F%200.1.7--rc.1%20%2F%20rc.2-7aa2f7)](https://github.com/deepseek-ai/dsh)
 
 可视化你的 **Ollama Cloud** 用量余量 —— 每 5 小时会话用量 + 周用量，
-侧边栏极简双横条常驻显示，设置页完整面板，Key 与快照持久化，自动刷新。
+侧边栏极简双横条常驻显示，插件详情页完整面板，Key 与快照持久化，自动刷新。
 
 *Ollama Cloud usage & remaining-quota visualization for DeepSeek Harness —
-5-hour session + weekly quota, always-visible sidebar bars, a full settings
-panel, persisted credentials & snapshots, auto-refresh.*
+5-hour session + weekly quota, always-visible sidebar bars, a full panel on the
+plugin's own detail page, persisted credentials & snapshots, auto-refresh.*
 
 </div>
 
@@ -30,7 +30,7 @@ panel, persisted credentials & snapshots, auto-refresh.*
 | 🎯 **会话用量（每 5 小时）** | Ollama Cloud 的 5 小时会话配额，置顶展示「已用 X% · 剩余 Y%」 |
 | 📅 **周用量（Weekly）** | 本周配额进度，与会话用量并排展示 |
 | 🎨 **侧边栏双横条** | 极简透明风格：会话 5h **淡紫** + 周用量**深紫**，各带百分比数字，悬停显示详情，每 60 秒自动更新（窄栏自动隐藏） |
-| 🖥️ **设置页完整面板** | 会话/周用量进度条、周用量重置倒计时、模型请求数排行、最近 5 条会话用量历史 |
+| 🖥️ **插件详情页完整面板** | 渲染在「插件列表 → dsh-ollama-usage」页面的描述与组件行之间：会话/周用量进度条、周用量重置倒计时、模型请求数排行、最近 5 条会话用量历史 |
 | 💾 **持久化** | API Key 与用量快照写入 `$DSH_HOME/storages/ollama-usage/usage.json`（权限 600，保留 24 条历史），跨对话 / 重启自动恢复 |
 | 🔄 **自动刷新** | Host 每 10 分钟自动查询（页面关闭也持续）；Key 失效（401）自动清除并提示 |
 | 🔑 **登录引导** | 未登录时一键打开 [ollama.com/settings](https://ollama.com/settings) 登录、到 [settings/keys](https://ollama.com/settings/keys) 创建 API Key；兼容旧版 CLI 的 `~/.ollama/auth.json` |
@@ -50,7 +50,7 @@ dsh --profile web
 
 ## 🚀 使用 Usage
 
-1. 打开 **设置 → Ollama 用量**；
+1. 打开 **插件列表 → dsh-ollama-usage**（面板渲染在该页面的描述与组件行之间）；
 2. 未登录时按面板指引：登录 [ollama.com](https://ollama.com/settings) →
    [settings/keys](https://ollama.com/settings/keys) 创建 API Key →
    粘贴并点 **检测**（或终端 `ollama signin` 后点 **重新检测本地凭证**）；
