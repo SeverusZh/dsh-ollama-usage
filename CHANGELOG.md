@@ -5,6 +5,40 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.11] - 2026-10-08
+
+### Fixed
+
+- **会话(5h)/周用量进度恒为 `null`：详情页面板显示「暂无数据」、侧边栏双横条显示「—」。**
+  Ollama 已把 `GET https://ollama.com/api/usage` 改成「Cloud usage」统计接口，只返回
+  `range` / `scope` / `granularity` / `totals` / `buckets`（请求量、token、美元分桶），
+  不再包含 `limits.session` / `limits.weekly`。旧实现只解析这两个字段，于是每次刷新
+  都持久化 `sessionPercent: null, weeklyPercent: null`（本机历史记录连续 24 条全为 `null`）。
+- 限额进度的唯一来源改为官方 `GET https://ollama.com/api/balance`
+  （契约见 <https://docs.ollama.com/api/balance>）。带会话/周限额的 legacy plan 返回
+  `included.session|weekly = { remaining_percent, resets_at }`，插件按
+  `已用% = 100 - remaining_percent` 换算并 clamp 到 `0~100`，不再依赖已消失的字段。
+- **重置时间改用接口真实值。** 移除 `weekly = 下周一 00:00 UTC` 的本地推算（那是接口
+  不下发 `resets_at` 时代的兜底）；`sessionResetAt` / `weeklyResetAt` 现在直接透传
+  `resets_at`，会话进度条也会显示重置倒计时。
+- 按美元计费的套餐（`included.balance_usd` / `allowance_usd` / `period`，没有 5h/周
+  限额）不再被当成解析失败：接口返回 200 即视为成功，两个百分比为 `null`，面板显示
+  「暂无数据」而不是错误。
+
+### Removed
+
+- `parseUsage` / `toPercent`（解析 `/api/usage` 的 `limits` / `activity`）与
+  `computeResetTimes`（本地推算周重置）——这些字段在 2026-10 的接口中已不存在。
+  模型请求数排行的数据源同样消失（官方文档标注 “usage breakdowns by model” 为
+  coming soon），面板的模型区块按空数据自动隐藏，`models` 字段保留在快照结构中
+  待官方上线。
+
+### Added
+
+- `test/balance-parse.mjs`：用真实抓取到的 `/api/balance` 响应体替身 `fetch`，驱动
+  桥接 `check`，回归断言百分比换算、`resets_at` 透传、持久化与历史追加，并覆盖
+  无限额套餐 / 非 JSON / 401 / 403 / 网络异常分支（不联网）。`npm test` 现在跑三个套件。
+
 ## [0.1.10] - 2026-09-29
 
 ### Compatibility

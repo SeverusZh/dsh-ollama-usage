@@ -20,8 +20,8 @@ plugin's own detail page, persisted credentials & snapshots, auto-refresh.*
 
 ---
 
-> **兼容性 / Compatibility**：v0.1.10 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
-> v0.1.10 targets DSH **≥0.1.5-rc.1**, verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1**; for older DSH releases use the last compatible npm version **0.1.5**.
+> **兼容性 / Compatibility**：v0.1.11 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
+> v0.1.11 targets DSH **≥0.1.5-rc.1**, verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1**; for older DSH releases use the last compatible npm version **0.1.5**.
 
 ## ✨ 功能特性 Features
 
@@ -30,13 +30,20 @@ plugin's own detail page, persisted credentials & snapshots, auto-refresh.*
 | 🎯 **会话用量（每 5 小时）** | Ollama Cloud 的 5 小时会话配额，置顶展示「已用 X% · 剩余 Y%」 |
 | 📅 **周用量（Weekly）** | 本周配额进度，与会话用量并排展示 |
 | 🎨 **侧边栏双横条** | 极简透明风格：会话 5h **淡紫** + 周用量**深紫**，各带百分比数字，悬停显示详情，每 60 秒自动更新（窄栏自动隐藏） |
-| 🖥️ **插件详情页完整面板** | 渲染在「插件列表 → dsh-ollama-usage」页面的描述与组件行之间：会话/周用量进度条、周用量重置倒计时、模型请求数排行、最近 5 条会话用量历史 |
+| 🖥️ **插件详情页完整面板** | 渲染在「插件列表 → dsh-ollama-usage」页面的描述与组件行之间：会话/周用量进度条、会话与周重置倒计时、最近 5 条会话用量历史 |
 | 💾 **持久化** | API Key 与用量快照写入 `$DSH_HOME/storages/ollama-usage/usage.json`（权限 600，保留 24 条历史），跨对话 / 重启自动恢复 |
 | 🔄 **自动刷新** | Host 每 10 分钟自动查询（页面关闭也持续）；Key 失效（401）自动清除并提示 |
 | 🔑 **登录引导** | 未登录时一键打开 [ollama.com/settings](https://ollama.com/settings) 登录、到 [settings/keys](https://ollama.com/settings/keys) 创建 API Key；兼容旧版 CLI 的 `~/.ollama/auth.json` |
 
-数据来源为 Ollama 官方接口 `GET https://ollama.com/api/usage`，与
-[ollama.com/settings](https://ollama.com/settings) 页面一致。
+限额进度数据来源于 Ollama 官方接口 `GET https://ollama.com/api/balance`
+（`included.session` / `included.weekly` 的 `remaining_percent` 与 `resets_at`），
+与 [ollama.com/settings](https://ollama.com/settings) 页面一致。
+
+> **v0.1.11 修复**：Ollama 在 2026-10 把 `GET /api/usage` 改为只返回按小时/天的
+> 请求量分桶，不再包含 `limits.session` / `limits.weekly`，旧版本因此把两个百分比
+> 解析成 `null` —— 面板显示「暂无数据」、侧边栏双横条显示「—」。
+> 现在限额进度改由 `/api/balance` 提供（`已用 = 100 - remaining_percent`），
+> 重置倒计时也直接使用接口下发的真实 `resets_at`。
 
 ## 📦 安装 Install
 
@@ -59,7 +66,7 @@ dsh --profile web
 
 ## 🔒 数据与隐私 Privacy
 
-- 仅向 `https://ollama.com/api/usage` 发送带 Bearer 的查询请求；
+- 仅向 `https://ollama.com/api/balance` 发送带 Bearer 的查询请求；
 - Key 以明文保存在本机 `$DSH_HOME/storages/ollama-usage/usage.json`（权限 600，
   与 `~/.ollama/auth.json` 同等级信任），随时可清除。
 
@@ -69,7 +76,7 @@ dsh --profile web
 ┌──────────────────────────┐        ┌─────────────────────────────┐
 │  browser (client bundle) │  RPC   │  host (lib/index.js)        │
 │  lib/client.js           │◄──────►│  webServer /ollama-usage    │
-│  · sidebar dual bars     │ 信封协议 │  · fetch api/usage (Bearer)│
+│  · sidebar dual bars     │ 信封协议 │  · fetch api/balance(Bearer)│
 │  · settings panel        │        │  · $DSH_HOME 持久化(0600)   │
 │  · login guidance        │        │  · 10min auto-refresh       │
 └──────────────────────────┘        └─────────────────────────────┘
@@ -85,11 +92,15 @@ dsh --profile web
 ## 🧪 测试 Tests
 
 ```bash
-DSH_HOME=.tmp-dsh-home HOME=.tmp-home node test/bridge-smoke.mjs
+npm test   # bridge-smoke → balance-parse → rpc-envelope-alpha4
 ```
 
-17 项冒烟测试覆盖：路由注册、no-token / 401 分支、持久化读写与清理、
-snapshot / forget / auth-state、非法信封与请求方法校验。
+- `test/bridge-smoke.mjs`（17 项）：路由注册、no-token / 401 分支、持久化读写与
+  清理、snapshot / forget / auth-state、非法信封与请求方法校验。
+- `test/balance-parse.mjs`：`/api/balance` 解析回归（不联网，fetch 替身）。用真实
+  响应体驱动 `check`，断言 5h / 周百分比换算、`resets_at` 透传、持久化与历史追加，
+  以及无限额套餐 / 非 JSON / 401 / 403 / 网络异常各分支。
+- `test/rpc-envelope-alpha4.mjs`：逐端点通过 alpha.4 的 Connection RPC 信封校验器。
 
 ## 🛠️ 开发 / 发布 Develop & Publish
 

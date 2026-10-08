@@ -101,17 +101,15 @@ assert(cleared.token === null, '401 后持久化 token 被清除(历史保留)')
 writeFileSync(usageFile, JSON.stringify({
   token: 'ollama-test-key',
   updatedAt: '2026-08-20T12:00:00.000Z',
-  usage: { sessionPercent: 0.3, weeklyPercent: 21.3, cost: '0.00000', periodType: 'last_4_weeks', periodStart: '2026-07-27T00:00:00Z', periodEnd: '2026-08-20T12:00:00Z', models: [] },
+  usage: { sessionPercent: 0.3, weeklyPercent: 21.3, sessionResetAt: null, weeklyResetAt: '2026-08-24T00:00:00.000Z', models: [] },
   history: [{ at: '2026-08-20T11:00:00.000Z', sessionPercent: 0.3, weeklyPercent: 21.3 }],
 }))
 r = await call('snapshot', {})
 assert(r.result.ok === true && r.result.value.usage.weeklyPercent === 21.3, 'snapshot 返回持久化用量')
 assert(r.result.value.tokenPersisted === true && r.result.value.history.length === 1, 'snapshot 带 tokenPersisted 与历史')
 assert(r.result.value.persisted === true, 'snapshot 报告 persisted: true(数据读自磁盘)')
-const now = new Date()
-const daysUntilMonday = ((7 - now.getUTCDay()) % 7) + 1
-const expectedWeeklyReset = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate() + daysUntilMonday)).toISOString()
-assert(r.result.value.usage.weeklyResetAt === expectedWeeklyReset, '周重置 = 下周一 00:00 UTC(当前为 ' + now.toISOString() + ')')
+// 重置时间现在是 /api/balance 下发的真值,原样透传,不再由插件按“下周一”推算
+assert(r.result.value.usage.weeklyResetAt === '2026-08-24T00:00:00.000Z', 'snapshot 原样透传 API 下发的 weeklyResetAt')
 
 // 4) forget
 r = await call('forget', {})
