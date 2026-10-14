@@ -4,10 +4,16 @@
 
 **Ollama Cloud 用量余量可视化 · DeepSeek Harness 插件**
 
-[![npm version](https://img.shields.io/npm/v/dsh-ollama-usage?color=7c66e8&label=npm)](https://www.npmjs.com/package/dsh-ollama-usage)
-[![GitHub release](https://img.shields.io/github/v/release/SeverusZh/dsh-ollama-usage?color=b39df7&label=release)](https://github.com/SeverusZh/dsh-ollama-usage/releases)
-[![License](https://img.shields.io/badge/license-MIT-9ece6a)](LICENSE)
-[![dsh](https://img.shields.io/badge/DSH%200.1.5--rc.1%20%2F%20rc.2%20%2F%200.1.6--alpha.2%20%2F%200.1.7--rc.1%20%2F%20rc.2%20%2F%200.2.0--rc.1-7aa2f7)](https://github.com/deepseek-ai/dsh)
+[![npm version](https://img.shields.io/npm/v/dsh-ollama-usage?style=flat-square&logo=npm)](https://www.npmjs.com/package/dsh-ollama-usage)
+[![npm downloads](https://img.shields.io/npm/dm/dsh-ollama-usage?style=flat-square&logo=npm)](https://www.npmjs.com/package/dsh-ollama-usage)
+[![license](https://img.shields.io/npm/l/dsh-ollama-usage?style=flat-square)](LICENSE)
+[![node](https://img.shields.io/badge/node-%3E%3D20-brightgreen?style=flat-square&logo=node.js)](package.json)
+[![GitHub release](https://img.shields.io/github/v/release/SeverusZh/dsh-ollama-usage?style=flat-square&logo=github)](https://github.com/SeverusZh/dsh-ollama-usage/releases)
+[![GitHub stars](https://img.shields.io/github/stars/SeverusZh/dsh-ollama-usage?style=flat-square&logo=github)](https://github.com/SeverusZh/dsh-ollama-usage)
+[![DSH](https://img.shields.io/badge/DSH-%E2%89%A50.1.7--rc.1-blue?style=flat-square)](https://github.com/deepseek-ai/deepseek-harness)
+[![Awesome DSH Plugin](https://awesome-dsh-plugin.com/badge.svg)](https://awesome-dsh-plugin.com)
+
+</div>
 
 可视化你的 **Ollama Cloud** 用量余量 —— 每 5 小时会话用量 + 周用量，
 侧边栏极简双横条常驻显示，插件详情页完整面板，Key 与快照持久化，自动刷新。
@@ -16,14 +22,9 @@
 5-hour session + weekly quota, always-visible sidebar bars, a full panel on the
 plugin's own detail page, persisted credentials & snapshots, auto-refresh.*
 
-</div>
-
 ---
 
-> **兼容性 / Compatibility**：v0.1.11 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
-> v0.1.11 targets DSH **≥0.1.5-rc.1**, verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1**; for older DSH releases use the last compatible npm version **0.1.5**.
-
-## ✨ 功能特性 Features
+## ✨ 功能特性 / Features
 
 | 能力 | 说明 |
 | --- | --- |
@@ -45,7 +46,7 @@ plugin's own detail page, persisted credentials & snapshots, auto-refresh.*
 > 现在限额进度改由 `/api/balance` 提供（`已用 = 100 - remaining_percent`），
 > 重置倒计时也直接使用接口下发的真实 `resets_at`。
 
-## 📦 安装 Install
+## 📦 安装 / Install
 
 ```bash
 dsh plugin --profile web add dsh-ollama-usage
@@ -55,7 +56,7 @@ dsh --profile web
 > 也可手动把 `dsh-ollama-usage` 加入 profile `package.json` 的
 > `dsh.profile.bundles` 后重启。
 
-## 🚀 使用 Usage
+## 🚀 使用 / Usage
 
 1. 打开 **插件列表 → dsh-ollama-usage**（面板渲染在该页面的描述与组件行之间）；
 2. 未登录时按面板指引：登录 [ollama.com](https://ollama.com/settings) →
@@ -64,13 +65,13 @@ dsh --profile web
 3. 检测成功后即持久化，展开侧边栏即可看到底部双横条，面板可随时查看详情与历史；
 4. 不再需要时点 **清除已存 Key** 移除本地凭证（历史保留）。
 
-## 🔒 数据与隐私 Privacy
+## 🔒 数据与隐私 / Privacy
 
 - 仅向 `https://ollama.com/api/balance` 发送带 Bearer 的查询请求；
 - Key 以明文保存在本机 `$DSH_HOME/storages/ollama-usage/usage.json`（权限 600，
   与 `~/.ollama/auth.json` 同等级信任），随时可清除。
 
-## 🏗️ 架构 Architecture
+## 🏗️ 架构 / Architecture
 
 ```
 ┌──────────────────────────┐        ┌─────────────────────────────┐
@@ -89,7 +90,26 @@ dsh --profile web
 - 接线：`cordis.patch.yml`（Loader 行）+ `package.json` 的
   `dsh.bundle.patch` / `dsh.client` 声明。
 
-## 🧪 测试 Tests
+## 🧩 兼容性 / Compatibility
+
+`peerDependencies` 中的 `@deepseek-ai/dsh*` 范围决定插件能否被 DSH 的兼容门禁放行。本插件声明 **`>=0.1.7-rc.1`**（无上限），并已实测：
+
+| DSH 版本 | 状态 |
+| --- | --- |
+| 0.1.5-rc.1 | ✅ 实测通过 |
+| 0.1.5-rc.2 | ✅ 实测通过 |
+| 0.1.6-alpha.2 | ✅ 实测通过 |
+| 0.1.7-rc.1 | ✅ 实测通过 |
+| 0.1.7-rc.2 | ✅ 实测通过 |
+| 0.2.0-rc.1 | ✅ 实测通过 |
+
+> 只列出**实际跑过**的版本；未实测的不列。
+
+v0.1.11 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
+
+## 🛠️ 开发 / Develop
+
+### 测试 / Tests
 
 ```bash
 npm test   # bridge-smoke → balance-parse → rpc-envelope-alpha4
@@ -102,7 +122,7 @@ npm test   # bridge-smoke → balance-parse → rpc-envelope-alpha4
   以及无限额套餐 / 非 JSON / 401 / 403 / 网络异常各分支。
 - `test/rpc-envelope-alpha4.mjs`：逐端点通过 alpha.4 的 Connection RPC 信封校验器。
 
-## 🛠️ 开发 / 发布 Develop & Publish
+### 构建与发布 / Build & Publish
 
 ```bash
 npm install                 # 安装依赖(@deepseek-ai/dsh-home-paths)
@@ -111,6 +131,6 @@ npm pack                    # 本地打包检查
 npm publish                 # 发布到 npm
 ```
 
-## 📄 License
+## 📄 许可证 / License
 
 [MIT](LICENSE) © 2026 dsh-ollama-usage contributors
