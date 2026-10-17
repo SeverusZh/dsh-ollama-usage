@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.1.12] - 2026-10-17
+
+### Compatibility
+
+- **DSH 0.2.1-rc.1 / rc.2**: added `engines.dsh: ">=0.1.7-rc.1"` (DSH 0.2.1 prefers
+  `engines.dsh` over peer ranges) and compatibility-matrix entries for both
+  `0.2.1-rc.1` and `0.2.1-rc.2`. The existing `@deepseek-ai/dsh-home-paths`
+  peer (`>=0.1.7-rc.1`) and the `webServer.register` / `connection.rpc.call`
+  surfaces used here are unchanged in 0.2.1.
+- **Verified**: the RPC envelope/balance probes pass on the 0.2.1-rc.1 dependency
+  set; `evaluatePluginCompatibility()` passes for 0.2.1-rc.1 and 0.2.1-rc.2.
+
 ## [0.1.11] - 2026-10-08
 
 ### Fixed
