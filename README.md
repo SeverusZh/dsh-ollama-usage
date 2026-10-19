@@ -65,6 +65,16 @@ dsh --profile web
 3. 检测成功后即持久化，展开侧边栏即可看到底部双横条，面板可随时查看详情与历史；
 4. 不再需要时点 **清除已存 Key** 移除本地凭证（历史保留）。
 
+## 🖼️ 界面预览 / Screenshots
+
+以下截图来自本地一次性预览实例，示例数据仅用于演示：
+
+![插件详情页用量面板](docs/assets/screenshots/config-panel.png)
+
+![插件详情页用量面板暗色主题](docs/assets/screenshots/config-panel-dark.png)
+
+![侧边栏用量双横条](docs/assets/screenshots/sidebar-bars.png)
+
 ## 🔒 数据与隐私 / Privacy
 
 - 仅向 `https://ollama.com/api/balance` 发送带 Bearer 的查询请求；

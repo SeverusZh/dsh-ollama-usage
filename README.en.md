@@ -62,6 +62,16 @@ dsh --profile web
 3. On success it is persisted; expand the sidebar to see the dual bars at the bottom, and the panel shows details and history at any time;
 4. When no longer needed, click **Clear stored Key** to remove the local credential (history is kept).
 
+## 🖼️ 界面预览 / Screenshots
+
+The screenshots below come from a throwaway local preview instance; the example data is for demonstration only:
+
+![Usage panel on the plugin detail page](docs/assets/screenshots/config-panel.png)
+
+![Usage panel on the plugin detail page in dark theme](docs/assets/screenshots/config-panel-dark.png)
+
+![Sidebar usage bars](docs/assets/screenshots/sidebar-bars.png)
+
 ## 🔒 数据与隐私 / Privacy
 
 - Only a Bearer-carrying query request is sent to `https://ollama.com/api/balance`;
