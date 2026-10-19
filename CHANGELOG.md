@@ -5,7 +5,23 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [0.1.12] - 2026-10-17
+## 0.1.13 - 2026-10-19
+
+### 新增
+
+- **客户端界面按 DSH 官方设计语言重做**：插件配置面板、侧栏双横条与 tool 视图卡片统一为 token 化视觉；面板改为「标题 + 状态说明 + 分区列表 + 底部操作」结构，会话 / 周用量进度条、模型请求数、最近记录与持久化状态分区展示。
+- 首屏 snapshot 落定前显示加载骨架；未登录、查询失败与已登录三种状态均有明确反馈。
+
+### 修复
+
+- 移除客户端样式中的硬编码中性色与字号，改用 `--dsw-*` 主题 token 与 11/12/13/14 字号阶梯、6/8 圆角与 token 阴影；暗色主题下的文字与进度条对比度恢复一致。
+- 面板底部版本号同步至 0.1.13。
+
+### 文档
+
+- README 与贡献指南标题规范化，版本引用同步至 0.1.13。
+
+## 0.1.12 - 2026-10-17
 
 ### Compatibility
 
@@ -17,7 +33,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Verified**: the RPC envelope/balance probes pass on the 0.2.1-rc.1 dependency
   set; `evaluatePluginCompatibility()` passes for 0.2.1-rc.1 and 0.2.1-rc.2.
 
-## [0.1.11] - 2026-10-08
+## 0.1.11 - 2026-10-08
 
 ### Fixed
 
@@ -51,7 +67,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   桥接 `check`，回归断言百分比换算、`resets_at` 透传、持久化与历史追加，并覆盖
   无限额套餐 / 非 JSON / 401 / 403 / 网络异常分支（不联网）。`npm test` 现在跑三个套件。
 
-## [0.1.10] - 2026-09-29
+## 0.1.10 - 2026-09-29
 
 ### Compatibility
 
@@ -66,7 +82,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   `dsh.compatibility.dshReleases` gains `"0.2.0-rc.1": "compatible"` and the README
   badge / compatibility note are updated.
 
-## [0.1.9] - 2026-09-27
+## 0.1.9 - 2026-09-27
 
 ### Changed
 
@@ -87,7 +103,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
     设置 → Ollama 用量.
 - No inject change: this plugin does not read any `ctx.remote.*` namespace.
 
-## [0.1.8] - 2026-09-25
+## 0.1.8 - 2026-09-25
 
 ### Changed
 
@@ -100,7 +116,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   0.1.7-rc.2. The 0.1.7-rc.1 → rc.2 official API delta removes/renames nothing
   (additive only), so no source adaptation was required.
 
-### Verified (no source change required)
+### Verified: no source change required
 
 - `@deepseek-ai/dsh-home-paths@0.1.7-rc.1` still exports `resolveDshHome`
   with the same signature, so the harness-home resolution and the state file
@@ -109,7 +125,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (`/ollama-usage`) with `inject: ['timer', 'webServer']`, and the Connection
   RPC result envelope — are unchanged in 0.1.7-rc.1.
 
-## [0.1.7] - 2026-09-22
+## 0.1.7 - 2026-09-22
 
 ### Fixed
 
@@ -132,7 +148,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   scanner treats them as `unknown`). `node` is declared as `>=20`, matching
   the existing `dshhub.compatibility.node` field.
 
-## [0.1.6] - 2026-09-04
+## 0.1.6 - 2026-09-04
 
 ### Fixed
 

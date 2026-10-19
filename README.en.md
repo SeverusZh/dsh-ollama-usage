@@ -28,7 +28,7 @@ plugin's own detail page, persisted credentials & snapshots, auto-refresh.
 | 🎯 **Session usage (per 5 hours)** | Ollama Cloud's 5-hour session quota, pinned at the top showing "used X% · remaining Y%" |
 | 📅 **Weekly usage** | This week's quota progress, shown next to the session usage |
 | 🎨 **Sidebar dual bars** | Minimal, transparent style: session 5h in **light purple** + weekly in **deep purple**, each with a percentage, details on hover, refreshed every 60 seconds (auto-hidden on narrow layouts) |
-| 🖥️ **Full panel on the plugin detail page** | Rendered between the description and component rows of the "Plugin list → dsh-ollama-usage" page: session/week usage bars, session and weekly reset countdowns, and the last 5 session-usage history entries |
+| 🖥️ **Full panel on the plugin detail page** | Rendered between the description and component rows of the "Plugin list → dsh-ollama-usage" page: session/week usage bars, session and weekly reset countdowns, and the last 5 session-usage history entries; card-based sections with loading / error / success states |
 | 💾 **Persistence** | The API Key and usage snapshot are written to `$DSH_HOME/storages/ollama-usage/usage.json` (mode 600, 24 history entries kept), restored automatically across conversations / restarts |
 | 🔄 **Auto-refresh** | The host queries every 10 minutes (even when the page is closed); an invalidated Key (401) is cleared automatically with a prompt |
 | 🔑 **Login guidance** | When not signed in, one click opens [ollama.com/settings](https://ollama.com/settings) to sign in and [settings/keys](https://ollama.com/settings/keys) to create an API Key; compatible with the legacy CLI's `~/.ollama/auth.json` |
@@ -104,7 +104,7 @@ Since DSH 0.2.1 the compatibility gate prefers `engines.dsh`. This plugin declar
 
 > Only versions that were **actually run** are listed; untested versions are omitted.
 
-v0.1.12 targets DSH **≥0.1.5-rc.1** (the `@deepseek-ai/dsh-*` peer was relaxed to `>=0.1.7-rc.1`), verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** (all RPC envelope probes pass; on 0.1.7-rc.2 the `/ollama-usage/snapshot` endpoint returns as measured; on 0.2.0-rc.1 it passes the new compatibility gate and loads normally; on 0.2.1-rc.1 the gate and RPC envelope probes pass, and 0.2.1-rc.2 passes the gate); for older DSH (0.1.0-rc.5 ~ rc.8) use the last compatible npm version, **0.1.5**.
+v0.1.13 targets DSH **≥0.1.5-rc.1** (the `@deepseek-ai/dsh-*` peer was relaxed to `>=0.1.7-rc.1`), verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** (all RPC envelope probes pass; on 0.1.7-rc.2 the `/ollama-usage/snapshot` endpoint returns as measured; on 0.2.0-rc.1 it passes the new compatibility gate and loads normally; on 0.2.1-rc.1 the gate and RPC envelope probes pass, and 0.2.1-rc.2 passes the gate); for older DSH (0.1.0-rc.5 ~ rc.8) use the last compatible npm version, **0.1.5**.
 
 ## 🛠️ 开发 / Develop
 
