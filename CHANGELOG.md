@@ -5,6 +5,18 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.14 - 2026-10-20
+
+### 新增
+
+- **侧边栏用量组件改版**：每个指标增加彩色状态点与更轻的 5px 进度条，百分比右对齐并使用等宽数字；用量达到 70% / 90% 时数值与填充自动切换为警告 / 错误语义色，与面板配色保持一致。
+- 极小的非零用量也能看到可见的圆头填充；未登录时显示克制的占位状态，不再显示两条空白进度条。
+- 悬浮提示补充会话与周用量的重置倒计时，进度条补充无障碍语义。
+
+### 文档
+
+- 更新侧边栏界面预览截图，版本引用同步至 0.1.14。
+
 ## 0.1.13 - 2026-10-19
 
 ### 新增

@@ -117,7 +117,7 @@ DSH 0.2.1 起兼容门禁优先读取 `engines.dsh`。本插件声明 **`engines
 
 > 只列出**实际跑过**的版本；未实测的不列。
 
-v0.1.13 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载；0.2.1-rc.1 上兼容门禁与 RPC envelope 探针通过，0.2.1-rc.2 门禁通过）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
+v0.1.14 支持 DSH **≥0.1.5-rc.1**（`@deepseek-ai/dsh-*` peer 放宽为 `>=0.1.7-rc.1`），已在 **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** 实测（RPC envelope 探针全过；0.1.7-rc.2 上 `/ollama-usage/snapshot` 实测返回；0.2.0-rc.1 上通过新的兼容性门禁并正常加载；0.2.1-rc.1 上兼容门禁与 RPC envelope 探针通过，0.2.1-rc.2 门禁通过）；旧版 DSH（0.1.0-rc.5 ~ rc.8）请使用最后兼容的 npm 版本 **0.1.5**。
 
 ## 🛠️ 开发 / Develop
 
