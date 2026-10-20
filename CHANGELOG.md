@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.15 - 2026-10-20
+
+### 新增
+
+- 侧边栏用量组件改为占满侧栏底部整行宽度，进度条延伸到侧栏右边界附近，标签与百分比分列两端，更贴合侧栏布局。
+
+### 文档
+
+- 更新侧边栏界面预览截图，版本引用同步至 0.1.15。
+
 ## 0.1.14 - 2026-10-20
 
 ### 新增
