@@ -114,7 +114,7 @@ Since DSH 0.2.1 the compatibility gate prefers `engines.dsh`. This plugin declar
 
 > Only versions that were **actually run** are listed; untested versions are omitted.
 
-v0.1.15 targets DSH **≥0.1.5-rc.1** (the `@deepseek-ai/dsh-*` peer was relaxed to `>=0.1.7-rc.1`), verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** (all RPC envelope probes pass; on 0.1.7-rc.2 the `/ollama-usage/snapshot` endpoint returns as measured; on 0.2.0-rc.1 it passes the new compatibility gate and loads normally; on 0.2.1-rc.1 the gate and RPC envelope probes pass, and 0.2.1-rc.2 passes the gate); for older DSH (0.1.0-rc.5 ~ rc.8) use the last compatible npm version, **0.1.5**.
+v0.1.16 targets DSH **≥0.1.5-rc.1** (the `@deepseek-ai/dsh-*` peer was relaxed to `>=0.1.7-rc.1`), verified on **0.1.5-rc.1 / 0.1.5-rc.2 / 0.1.6-alpha.2 / 0.1.7-rc.1 / 0.1.7-rc.2 / 0.2.0-rc.1** (all RPC envelope probes pass; on 0.1.7-rc.2 the `/ollama-usage/snapshot` endpoint returns as measured; on 0.2.0-rc.1 it passes the new compatibility gate and loads normally; on 0.2.1-rc.1 the gate and RPC envelope probes pass, and 0.2.1-rc.2 passes the gate); for older DSH (0.1.0-rc.5 ~ rc.8) use the last compatible npm version, **0.1.5**.
 
 ## 🛠️ 开发 / Develop
 

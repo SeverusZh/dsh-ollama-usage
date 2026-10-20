@@ -5,6 +5,16 @@ All notable changes to this project are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.1.16 - 2026-10-20
+
+### 新增
+
+- 侧边栏用量组件补充上下留白，与上方侧栏条目、下方账号行拉开间距，避免整行铺满后贴边。
+
+### 文档
+
+- 更新侧边栏界面预览截图，版本引用同步至 0.1.16。
+
 ## 0.1.15 - 2026-10-20
 
 ### 新增
